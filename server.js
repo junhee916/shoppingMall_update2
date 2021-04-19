@@ -1,9 +1,12 @@
+require('dotenv').config()
 const express = require("express")
 const bodyParser = require("body-parser")
 const morgan = require("morgan")
 const cors = require("cors")
 
 const app = express()
+
+require('./config/database')
 
 const productRouter = require("./router/product")
 const orderRouter = require("./router/order")
@@ -17,6 +20,6 @@ app.use(morgan("dev"))
 app.use("/product", productRouter)
 app.use("/order", orderRouter)
 
-const PORT = 5000
+const PORT = process.env.PORT || 7000
 
-app.listen(PORT, console.log("서버 실행"))
+app.listen(PORT, console.log("connected server"))
